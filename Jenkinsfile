@@ -1,5 +1,7 @@
 node {
 	stage 'Checkout'
-	stage 'Build'
-	stage 'Archive'
+	stage 'Build' {
+		def customImage = docker.build("nadepereira/relautimages:${env.BUILD_ID}")
+	}
+        stage 'Archive'
 }
