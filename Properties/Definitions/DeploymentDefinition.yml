@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: testcoreapp-deployment
+    labels:
+        app: testcoreapp
+    namespace: ingress-nginx
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: testcoreapp
+    template:
+        metadata:
+            labels: {app: testcoreapp}
+        spec:
+            containers: [{name: testcoreapp, image: 'nadpereira/relautimages:testcoreapp', ports: [{containerPort: 80}]}]
+            imagePullSecrets: [{name: myregistrykey}]
+

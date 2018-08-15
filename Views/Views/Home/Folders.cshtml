@@ -1,0 +1,41 @@
+﻿@model FoldersModel
+<h2>Folder Info</h2>
+
+<div class="col-md-offset-3 col-md-6">
+    Message: @ViewBag.Message
+</div>
+<br />
+<div class="col-md-offset-3 col-md-6">
+    Current Folder is @Model.CurrentDirectory
+</div>
+<br /><br />
+
+<form asp-action="WriteToFile" method="post">
+    <div class="col-md-offset-3 col-md-6">
+        File Path:  <input name="filePath" id="filePath" type="text" />&nbsp;&nbsp;&nbsp;<button type="submit">Write a line</button>
+
+
+    </div>
+</form>
+<br /><br />
+<div class="col-md-offset-3 col-md-6">
+    Folders are:
+    <table>
+        @foreach (var folder in Model.Folders)
+        {
+            <tr><td>@folder</td></tr>
+
+        }
+    </table>
+</div>
+<br /><br />
+<div class="col-md-offset-3 col-md-6">
+    Files are:
+    <table>
+        @foreach (var file in Model.Files)
+        {
+            <tr><td>@file</td></tr>
+
+        }
+    </table>
+</div>

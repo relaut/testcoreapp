@@ -1,0 +1,17 @@
+﻿apiVersion: v1
+kind: Service                                           
+metadata:
+  name: testcoreapp-service                             
+  labels:
+    app: testcoreapp-service
+    version: 1.0.0.0
+  namespace: ingress-nginx
+spec:                                                
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: NodePort  #creates LoadBalancer
+  selector:
+    app: testcoreapp                          

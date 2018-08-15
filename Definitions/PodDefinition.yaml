@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: Pod                                            # 1
+metadata:
+  name: testcoreapp                                  # 2
+  labels:
+    app: testcoreapp
+spec:                                                # 3
+  containers:
+    - image: nadpereira/relautimages:testcoreapp # 4
+      name: testcoreapp                              # 5
+      ports:
+        - containerPort: 80
+  imagePullSecrets:
+        - name: myregistrykey                          # 6

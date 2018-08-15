@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0003
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: slow
+  awsElasticBlockStore:
+    volumeID: vol-06395a95532051362
+    fsType: ext4

@@ -1,0 +1,11 @@
+﻿kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: threegitwo-claim
+spec:
+  storageClassName: slow
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

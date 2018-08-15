@@ -1,0 +1,11 @@
+﻿apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: testcoreapp-ingress
+  namespace: ingress-nginx
+spec:
+  rules:
+  - host: testcoreapp.phase1.monster.io
+  backend:
+    serviceName: testcoreapp-service
+    servicePort: 80
