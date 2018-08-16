@@ -1,9 +1,20 @@
-node {
-	stage 'Checkout'
-	stage 'Build' {
-		steps {
-		def customImage = docker.build("nadepereira/relautimages:${env.BUILD_ID}")
-		}
-	}
-        stage 'Archive'
+pipeline {
+    agent none 
+    stages {
+	
+	stage('Checkout'){}
+        stage('Build') {
+            agent { docker 'microsoft/dotnet:sdk' } 
+            steps {
+                echo 'Hello!'
+                def customImage = docker.build("nadepereira/relautimages:${env.BUILD_ID}")
+            }
+        }
+        stage('Archive') {
+            steps {
+                echo 'Archiving....'
+                
+            }
+        }
+    }
 }
