@@ -2,7 +2,11 @@ pipeline {
     agent none 
     stages {
 	
-	stage('Checkout'){}
+	stage('Checkout') {
+		steps {
+		echo 'Inside Checkout ...'
+		}
+	}
         stage('Build') {
             agent { docker 'microsoft/dotnet:sdk' } 
             steps {
