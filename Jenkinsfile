@@ -10,8 +10,10 @@ pipeline {
         stage('Build') {
             agent { docker 'microsoft/dotnet:sdk' } 
             steps {
+		    scripts {
                 echo 'Hello!'
-                def customImage = docker.build("nadepereira/relautimages:${env.BUILD_ID}")
+			    def customImage = docker.build("nadepereira/relautimages:${env.BUILD_ID}")
+		    }
             }
         }
         stage('Archive') {
