@@ -8,7 +8,7 @@ pipeline {
 		}
 	}
         stage('Build') {
-            agent { docker 'microsoft/dotnet:sdk' } 
+            //agent { docker 'microsoft/dotnet:sdk' } 
             steps {
 		    script {
                 echo 'Hello!'
