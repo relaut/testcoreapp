@@ -5,7 +5,9 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                docker.Build();
+                script {
+                    docker.Build();
+                }
             }
         }
     }
