@@ -13,7 +13,8 @@ podTemplate(label: 'dockerPod', containers: [
      }
         stage('Build Docker Image') {
         container('docker') {
-            docker.build("nadepereira/relautimages:${env.BUILD_ID}")
+            //docker.build("nadepereira/relautimages:${env.BUILD_ID}")
+            sh("docker build -f Dockerfile -t test .")
             }
         }
      }
