@@ -1,13 +1,19 @@
+
+node {
+  def branchVersion = ""
+
+  stage ('Checkout') {
+    // checkout repository
+    checkout scm
+
+    // checkout input branch 
+    sh "git checkout ${caller.env.BRANCH_NAME}"
+  }
+
 pipeline {
     agent none 
     stages {
 	
-	stage('Checkout') {
-		steps {
-		echo 'Inside Checkout ...'
-			checkout scm
-		}
-	}
         stage('Build') {
             //agent { docker 'microsoft/dotnet:sdk' } 
             steps {
