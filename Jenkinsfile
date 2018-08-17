@@ -5,6 +5,7 @@ pipeline {
 	stage('Checkout') {
 		steps {
 		echo 'Inside Checkout ...'
+			checkout scm
 		}
 	}
         stage('Build') {
