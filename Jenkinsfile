@@ -17,11 +17,18 @@ podTemplate(label: 'dockerPod', containers: [
      }
     
      //just an example ... pull requests MAY make more sense to use   
-     stage('Build for Prod') {
+     stage('Build') {
         userInput = input(
         id: 'Proceed1', message: 'Build for Production?', parameters: [
         [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Build for Production']
         ])
+         
+         when { userInput }
+    steps {
+        echo 'I execute on non-master branches.'
+    }
+         
+         
      }
       
         
