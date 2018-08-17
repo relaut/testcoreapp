@@ -11,11 +11,14 @@ podTemplate(label: 'dockerPod', containers: [
     stage('Checkout SCM') {
         checkout scm
      }
-        stage('build docker image') {
+        stage('Build Docker Image') {
         container('docker') {
             docker.build("nadepereira/relautimages:${env.BUILD_ID}")
             }
         }
+     }
+    stage('Publish Container') {
+        echo 'PUBLISHING'
      }
 }
 
