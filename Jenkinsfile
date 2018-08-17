@@ -36,11 +36,7 @@ podTemplate(label: 'dockerPod', containers: [
             }
         }
         }}
-    else {
-        stage('Build Image for Dev') {
-        echo 'Building for dev...'
-        }
-    }
+    
     stage('Publish Container') {
         echo 'PUBLISHING'
      }
