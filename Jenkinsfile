@@ -19,8 +19,8 @@ podTemplate(label: 'dockerPod', containers: [
      //just an example ... pull requests MAY make more sense to use   
      stage('Build for Prod') {
         userInput = input(
-        id: 'Proceed1', message: 'Was this successful?', parameters: [
-        [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']
+        id: 'Proceed1', message: 'Build for Production?', parameters: [
+        [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Build for Production']
         ])
      }
       
@@ -28,13 +28,19 @@ podTemplate(label: 'dockerPod', containers: [
     stage('Checkout SCM') {
         checkout scm
      }
-        stage('Build Docker Image') {
+        if (userInput){
+        stage('Build Image for Prod') {
         container('docker') {
             docker.build("nadepereira/relautimages:${env.BUILD_ID}")
             //sh("docker build -f Dockerfile -t test .")
             }
         }
-     }
+        }}
+    else {
+        stage('Build Image for Dev') {
+        echo 'Building for dev...'
+        }
+    }
     stage('Publish Container') {
         echo 'PUBLISHING'
      }
