@@ -10,7 +10,6 @@ node {
     sh "git checkout ${caller.env.BRANCH_NAME}"
   }
 
-pipeline {
     agent none 
     stages {
 	
@@ -30,4 +29,4 @@ pipeline {
             }
         }
     }
-}
+
