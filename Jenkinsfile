@@ -24,7 +24,7 @@ pipeline {
             branch ‘*/master’
         }
         steps {
-           archive ‘*/target/**/*’
+           echo 'Archive step'
         }
         }
     }
