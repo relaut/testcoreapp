@@ -4,14 +4,16 @@ podTemplate(label: 'mypod', containers: [
   ],
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-  ]) 
-pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
+  ]) {
+
+    node('mypod') {
+
+        checkout scm
+
+        stage('build and push the bot image') {
+            container('docker') {
+                    docker build
+                }
             }
         }
     }
