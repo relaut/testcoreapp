@@ -1,26 +1,10 @@
 pipeline {
-    agent none 
+    agent { dockerfile true }
     stages {
-	
-	stage('Checkout') {
-		steps {
-		echo 'Inside Checkout ...'
-			checkout scm
-		}
-	}
-        stage('Build') {
-            //agent { docker 'microsoft/dotnet:sdk' } 
+        stage('Test') {
             steps {
-		    script {
-                echo 'Hello!'
-		docker.build("nadepereira/relautimages:${env.BUILD_ID}")
-		    }
-            }
-        }
-        stage('Archive') {
-            steps {
-                echo 'Archiving....'
-                
+                sh 'node --version'
+                sh 'svn --version'
             }
         }
     }
