@@ -12,7 +12,7 @@ podTemplate(label: 'mypod', containers: [
 
         stage('build and push the bot image') {
             container('docker') {
-                    docker build
+                    docker.build("nadepereira/relautimages:${env.BUILD_ID}")
                 }
             }
         }
