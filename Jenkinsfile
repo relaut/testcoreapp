@@ -11,6 +11,26 @@ podTemplate(label: 'dockerPod', containers: [
     stage('Checkout SCM') {
         checkout scm
      }
+        stage ('Branch') {
+      
+      input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                parameters {
+                    string(name: 'PROD_DEPLOY', defaultValue: 'No', description: 'Perform Prod Deployment?')
+                }
+            }
+      
+            when {
+                // Only say hello if a "greeting" is requested
+                expression { PROD_DEPLOY == 'Yes' }
+            }
+            steps {
+                echo "Performing Prod Deployment!"
+            }
+            
+        }
+  }
         stage('Build Docker Image') {
         container('docker') {
             docker.build("nadepereira/relautimages:${env.BUILD_ID}")
