@@ -18,17 +18,7 @@ podTemplate(label: 'dockerPod', containers: [
     
      //just an example ... pull requests MAY make more sense to use   
      stage('Build for Prod') {
-        try {
-    userInput = input(
-        id: 'Proceed1', message: 'Should we deploy to Prod?', parameters: [
-        [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']
-        ])
-} catch(err) { // input false
-    def user = err.getCauses()[0].getUser()
-    userInput = false
-    echo "Aborted by: [${user}]"
-}
-        }
+        
      }
       
         
