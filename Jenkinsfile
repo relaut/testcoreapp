@@ -18,7 +18,10 @@ podTemplate(label: 'dockerPod', containers: [
     
      //just an example ... pull requests MAY make more sense to use   
      stage('Build for Prod') {
-        
+        userInput = input(
+        id: 'Proceed1', message: 'Was this successful?', parameters: [
+        [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']
+        ])
      }
       
         
