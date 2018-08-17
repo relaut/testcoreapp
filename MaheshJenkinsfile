@@ -1,5 +1,4 @@
 ﻿#!/usr/bin/groovy
-
 echo 'Starting new build'
 echo "envname=${params.ENV}"
 podTemplate(label: 'jenkins-pipeline', containers: [
