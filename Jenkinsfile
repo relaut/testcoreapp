@@ -6,13 +6,31 @@ podTemplate(label: 'dockerPod', containers: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]) 
 {
+    def userInput
+    
     node('dockerPod') {
     
-     stage('Verify Release Type') {
-        timeout(time: 10, unit: 'MINUTES') {
-        input message: "Does Pre-Production look good?"
+     stage('Verify Step') {
+        timeout(time: 1, unit: 'MINUTES') {
+        input message: "Should we continue?"
         }
      }
+    
+     //just an example ... pull requests MAY make more sense to use   
+     stage('Build for Prod') {
+        try {
+    userInput = input(
+        id: 'Proceed1', message: 'Should we deploy to Prod?', parameters: [
+        [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']
+        ])
+} catch(err) { // input false
+    def user = err.getCauses()[0].getUser()
+    userInput = false
+    echo "Aborted by: [${user}]"
+}
+        }
+     }
+      
         
     stage('Checkout SCM') {
         checkout scm
