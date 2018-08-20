@@ -1,5 +1,4 @@
-﻿#!/usr/bin/groovy 
-echo ( "Starting new build")
+﻿echo ( "Starting new build")
 echo "envname=${params.ENV}"
 def podLabel = "jenkins-pipeline-${UUID.randomUUID().toString()}"
 podTemplate(label: podLabel, containers: [
