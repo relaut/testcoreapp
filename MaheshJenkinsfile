@@ -1,1 +1,10 @@
-﻿println "Hello"
+﻿pipeline {
+    agent any 
+    stages {
+        stage('Starting') {
+            steps {
+                echo 'Building application!' 
+            }
+        }
+    }
+}
