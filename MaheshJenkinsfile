@@ -1,27 +1,2 @@
-﻿#!/usr/bin/groovy
-echo ( "Starting new build")
-echo "envname=${params.ENV}"
-def podLabel = "jenkins-pipeline-${UUID.randomUUID().toString()}"
-podTemplate(label: podLabel, containers: [
-    containerTemplate(name: 'jnlp', image: 'fdawsdevus/jnlp-docker:2.0'),
-    containerTemplate(name: 'kubectl', image: 'fdawsdevus/k8s-kubectl:latest', command: 'cat', ttyEnabled: true)
-],
-volumes:[
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-]){
-
-  node (podLabel) {
-
-   def projectName = build.environment.get("GIT_URL").replaceAll('https://github.com/', '').replaceAll('.git', '')
-	//def repoName = 'fdawsdevus'
-   echo "Repo name is ${projectName}" 
-    //def pwd = pwd()
-	//def appName = 'dotnetapi'
-  
-	def imageTag = "${projectName}:${params.ENV}.${env.BUILD_NUMBER}".toLowerCase()
-	echo "Image tag is ${imageTag}"
-   // checkout scm
-
-    // read in required jenkins workflow config values
-  }
-}
+﻿#!/usr/bin/env groovy
+println "Hello"
