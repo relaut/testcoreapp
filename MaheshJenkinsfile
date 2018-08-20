@@ -12,14 +12,14 @@ volumes:[
   node (podLabel) {
 
    def projectName = build.environment.get("GIT_URL").replaceAll('https://github.com/', '').replaceAll('.git', '')
-	#def repoName = 'fdawsdevus'
+	//def repoName = 'fdawsdevus'
    echo "Repo name is ${projectName}" 
-    #def pwd = pwd()
-	#def appName = 'dotnetapi'
+    //def pwd = pwd()
+	//def appName = 'dotnetapi'
   
 	def imageTag = "${projectName}:${params.ENV}.${env.BUILD_NUMBER}".toLowerCase()
 	echo "Image tag is ${imageTag}"
-   # checkout scm
+   // checkout scm
 
     // read in required jenkins workflow config values
   }
