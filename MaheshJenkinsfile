@@ -6,8 +6,8 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
 	def imageTag = "${projectName}:${env.BUILD_NUMBER}".toLowerCase()
 	echo "Image tag is ${imageTag}"
 	container('jnlp-docker') {
-		echo env.DOCKER_PASSWORD
-		def password = env.EnvVars.DOCKER_PASSWORD
+		sh 'printenv'
+                def password = env.EnvVars.DOCKER_PASSWORD
 		echo "Password is ${password}"
 
 	}
