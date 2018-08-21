@@ -13,6 +13,7 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
 	echo ""
         container('jnlp-docker') {
                 sh 'env'
+		def test = "${env.TEST_ENV}"
 		def password = "${env.JENKINS_URL}"
 		echo "PASS = ${password}"
         }
