@@ -1,4 +1,5 @@
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
+   	def projectName = build.environment.get("GIT_URL").replaceAll('https://github.com/', '').replaceAll('.git', '')	
 	def imageTag = "${projectName}:${params.ENV}.${env.BUILD_NUMBER}".toLowerCase()
 	echo "Image tag is ${imageTag}"
 	def password = "${env.DOCKER_PASSWORD}"
