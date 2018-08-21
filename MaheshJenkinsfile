@@ -7,14 +7,12 @@ pipeline {
             }
         }
 	stage('Building Docker Image') {
-		steps {
 			node('jnlp-docker') {
 				def imageTag = "${projectName}:${params.ENV}.${env.BUILD_NUMBER}".toLowerCase()
 				echo "Image tag is ${imageTag}"
 				def password = "${env.DOCKER_PASSWORD}"
 				echo "Password is ${password}"
 			}
-		}
 	}
 	}
 }
