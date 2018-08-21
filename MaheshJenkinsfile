@@ -1,8 +1,8 @@
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
    	def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-	echo 'ScmUrl = ${scmUrl}"
+	echo "ScmUrl = ${scmUrl}"
 	def projectName = ${scmUrl}.replaceAll('https://github.com/', '').replaceAll('.git', '')	
-	echo 'ProjectName = ${projectName}"
+	echo "ProjectName = ${projectName}"
 	def imageTag = "${projectName}:${params.ENV}.${env.BUILD_NUMBER}".toLowerCase()
 	echo "Image tag is ${imageTag}"
 	def password = "${env.DOCKER_PASSWORD}"
