@@ -5,6 +5,7 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
         echo "ProjectName = ${projectName}"
         def imageTag = "${projectName}:${env.BUILD_NUMBER}".toLowerCase()
         echo "Image tag is ${imageTag}"
+	env.TEST_ENV="test"
 	sh 'env'
 	echo ""
 	echo ""
