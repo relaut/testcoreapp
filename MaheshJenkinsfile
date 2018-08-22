@@ -18,7 +18,7 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
 		echo "Image tag is ${imageTag}"
 		container('jnlp-docker') {
 			sh 'printenv'
-			def uname = envVars["DOCKER_USERNAME"]
+			def uname = '$env.envVars["DOCKER_USERNAME"]'
 			echo "Uname is ${uname}"
 		}
 	}
