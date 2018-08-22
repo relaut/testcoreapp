@@ -1,5 +1,5 @@
 node('jenkins-slave') {
-	node('jnlp-docker') {
+	container('jnlp-docker') {
 		sh 'env'
 	}
 }
