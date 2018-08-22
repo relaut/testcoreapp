@@ -1,15 +1,19 @@
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
-       withEnv([Docker_Password="${env.DOCKER_PASSWORD}"])
-   	def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-	echo "ScmUrl = ${scmUrl}"
-	def projectName = "${scmUrl}".replaceAll('https://github.com/', '').replaceAll('.git', '')
-	echo "ProjectName = ${projectName}"
-	def imageTag = "${projectName}:${env.BUILD_NUMBER}".toLowerCase()
-	echo "Image tag is ${imageTag}"
-	container('jnlp-docker') {
-		sh 'printenv'
-                def password = Docker_Password
-		echo "Password is ${password}"
-
+       withEnv([Docker_Password="${env.DOCKER_PASSWORD}", MyVar="Test"]){
+	     echo "MyVaris ${MyVar}"
+		def password = Docker_Password
+	    echo "Password is ${password}"
+	    
+   		def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
+		echo "ScmUrl = ${scmUrl}"
+		def projectName = "${scmUrl}".replaceAll('https://github.com/', '').replaceAll('.git', '')
+		echo "ProjectName = ${projectName}"
+		def imageTag = "${projectName}:${env.BUILD_NUMBER}".toLowerCase()
+		echo "Image tag is ${imageTag}"
+		container('jnlp-docker') {
+			sh 'printenv'
+			def password = Docker_Password
+			echo "Password is ${password}"
+		}
 	}
 }
