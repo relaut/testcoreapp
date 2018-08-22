@@ -5,6 +5,7 @@ pipeline {
 			steps {
 				echo env.BUILD_NUMBER
 				echo env.DOCKER_PASSWORD
+				echo currentBuild.buildVariables
 			}
 		}
 	}
