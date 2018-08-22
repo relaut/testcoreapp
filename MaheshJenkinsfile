@@ -1,8 +1,8 @@
-def pwd = env.DOCKER_PASSWORD
+def pwd = $(env.BUILD_NUMBER)
 echo "Pwd is ${pwd}"
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
 		echo 'Test'
-       withEnv(['Docker_Password=${env.DOCKER_PASSWORD}', 'MyVar=Test']){
+       withEnv(['Docker_Password=${env.BUILD_NUMBER}', 'MyVar=Test']){
 	     echo "MyVar is ${MyVar}"
 		def password = Docker_Password
 	    echo "Password is ${password}"
