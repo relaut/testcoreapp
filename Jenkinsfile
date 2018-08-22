@@ -16,6 +16,6 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
 		sh 'printenv'
 		echo "DOCKER_PASSWORD = ${env.DOCKER_PASSWORD}"
 		echo "*********************"
-		echo env
+		echo DOCKER_PASSWORD
         }
 }
