@@ -19,6 +19,6 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
         container('jnlp-docker') {
                 sh 'env'
 		sh 'printenv'
-		echo "DOCKER_PASSWORD = ${DOCKER_PASSWORD}"
+		echo "DOCKER_PASSWORD = ${parameters.DOCKER_PASSWORD}"
         }
 }
