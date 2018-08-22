@@ -1,11 +1,14 @@
 def pwd = "${env.BUILD_NUMBER}"
 echo "Pwd is ${pwd}"
+ environment {
+        pwd = "${pwd}"
+    }
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
 		echo 'Test'
        withEnv(['Docker_Password="${pwd}"', 'MyVar=Test']){
-	     echo "MyVar is ${MyVar}"
+	     echo "MyVar is ${env.BUILD_NUMBER}"
 		def password = Docker_Password
-	    echo "Password is ${password}"
+	    echo "Password is ${pwd}"
 	    
    		def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
 		echo "ScmUrl = ${scmUrl}"
