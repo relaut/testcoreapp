@@ -1,7 +1,6 @@
 node('jenkins-slave') {
 	container('jnlp-docker') {
-		sh 'env.DOCKER_PASSWORD'
-		def home = "${env.HOME}"
+		echo "'some data' >> ./out.txt"
 		echo "${env.HOME}"
 		echo "${env.JENKINS_NAME}"
 		echo "${env.DOCKER_PASSWORD}"
