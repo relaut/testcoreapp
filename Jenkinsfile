@@ -1,3 +1,8 @@
+parameters{
+	DOCKER_PASSWORD="${DOCKER_PASSWORD}"
+}
+
+
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
         def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
         echo "ScmUrl = ${scmUrl}"
@@ -13,9 +18,7 @@ node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plu
 	echo ""
         container('jnlp-docker') {
                 sh 'env'
-		def test = "${env.TEST_ENV}"
-		def password = "${env.DOCKER_PASSWORD}"
-		echo "PASS = ${password}"
-		echo "TEST = ${test}"
+		sh 'printenv'
+		echo "DOCKER_PASSWORD = ${DOCKER_PASSWORD}"
         }
 }
