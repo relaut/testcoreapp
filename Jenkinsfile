@@ -1,11 +1,5 @@
-pipeline {
-	agent none
-	stages {
-		stage('Build') {
-			agent { node {label 'jnlp-docker'} }
-			steps {
-				echo env.BUILD_NUMBER
-			}
-		}
+node('jenkins-slave') {
+	node('jnlp-docker') {
+		sh 'env'
 	}
-}	
+}
