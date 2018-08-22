@@ -1,7 +1,7 @@
 pipeline {
 	agent any 
-	sh 'env'
 	stages {
+		sh 'env'
 		stage('Build') {
 			steps {
 				echo env.BUILD_NUMBER
