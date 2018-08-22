@@ -1,15 +1,15 @@
-def pwd = "${env.BUILD_NUMBER}"
-echo "Pwd is ${pwd}"
+def pwd1 = "${env.BUILD_NUMBER}"
+echo "Pwd is ${pwd1}"
  environment {
-        pwd = "${pwd}"
+        pwd = "${pwd1}"
     }
 node('jenkins-slave') { //jenkins slave is the pod label from the Kubernetes plugin config
 		echo 'Test'
-       withEnv(['Docker_Password="${pwd}"', 'MyVar=Test']){
+       withEnv(['Docker_Password="${pwd1}"', 'MyVar=Test']){
 	     echo "MyVar is ${env.BUILD_NUMBER}"
 		def password = Docker_Password
 	    echo "Password is ${pwd}"
-	    
+	    echo "Docker Password is ${Docker_Password}"
    		def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
 		echo "ScmUrl = ${scmUrl}"
 		def projectName = "${scmUrl}".replaceAll('https://github.com/', '').replaceAll('.git', '')
