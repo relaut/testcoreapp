@@ -11,9 +11,10 @@ node('jenkins-slave') {
 		def docker_user = sh 'echo $DOCKER_USERNAME'
 		echo $docker_user
 		def docker_repo_name = sh 'printenv DOCKER_REPO_NAME'
-	        def cmd = "docker login --username=${docker_user} --password=${docker_pwd}"
-		echo "Command = ${cmd}"
+	        def cmd = "docker login --username=" + $docker_user + " --password=" + $docker_pwd
+		echo cmd
 		echo "*******************************************"
+		sh("printenv DOCKER_USERNAME")
 		sh("echo $DOCKER_USERNAME")
 		sh("docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD")
 		sh("docker build -f Dockerfile -t ${imageTag} .")
