@@ -1,7 +1,7 @@
 node('jenkins-slave') {
 	container('jnlp-docker') {
 		def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-		def projectname = "${scmurl}".replaceall('https://github.com/', '').replaceall('.git', '')
+		def projectname = "${scmUrl}".replaceall('https://github.com/', '').replaceall('.git', '')
                 echo "ProjectName = ${projectName}"
 
                 def imageTag = "${projectName}:${env.BUILD_NUMBER}".toLowerCase()
