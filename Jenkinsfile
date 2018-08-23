@@ -11,7 +11,7 @@ node('jenkins-slave') {
 		def docker_user = sh 'echo $DOCKER_USERNAME'
 		echo "*******************************************"
 		sh """
-		docker login --username=${env.DOCKER_USERNAME} --password=${env.DOCKER_PASSWORD}
+		docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
 		"""
 		sh("echo docker login --username='+DOCKER_USERNAME+' --password='+DOCKER_PASSWORD+' > /var/out.txt")
 		echo "${test}"
