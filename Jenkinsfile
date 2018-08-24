@@ -22,6 +22,7 @@ node('jenkins-slave') {
                 service docker restart
                 """) */
 		checkout scm
+		sh(''' dockerd ''')
                 sh(''' docker version ''')
 		sh(''' docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD ''')
 //                def dockerTag  = "${docker_repo_name}/${imageTag}"
