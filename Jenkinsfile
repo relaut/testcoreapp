@@ -20,7 +20,10 @@ node('jenkins-slave') {
 		//sh("echo $DOCKER_USERNAME")
 		checkout scm
 		sh(''' docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD ''')
-		sh(""" docker build -f Dockerfile -t ${imageTag} .""")
-		sh("""docker push ${docker_repo_name}/${imageTag}""")
+                def dockerTag  = "${docker_repo_name}/${imageTag}"
+                echo ${dockerTag}
+		sh(""" docker build -f Dockerfile -t ${dockerTag} .""")
+                   
+		sh("""docker push ${docker_repo_name}/${dockerTag}""")
 	}
 }
