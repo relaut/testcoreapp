@@ -18,6 +18,7 @@ node('jenkins-slave') {
 		//echo cmd
 		//sh("printenv DOCKER_USERNAME")
 		//sh("echo $DOCKER_USERNAME")
+		checkout scm
 		sh(''' docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD ''')
 		sh(""" docker build -f Dockerfile -t ${imageTag} .""")
 		sh("""docker push ${docker_repo_name}/${imageTag}""")
