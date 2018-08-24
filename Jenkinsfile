@@ -19,6 +19,7 @@ node('jenkins-slave') {
                 sh ("""
                 apt-get update
                 apt-get upgrade docker-ce -y
+                service docker restart
                 """)
 		checkout scm
                 sh(''' docker version ''')
