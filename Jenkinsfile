@@ -16,6 +16,10 @@ node('jenkins-slave') {
 		//echo cmd
 		//sh("printenv DOCKER_USERNAME")
 		//sh("echo $DOCKER_USERNAME")
+                sh ("""
+                sudo apt-get update
+                sudo apt-get upgrade docker-ce 
+                """)
 		checkout scm
                 sh(''' docker version ''')
 		sh(''' docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD ''')
