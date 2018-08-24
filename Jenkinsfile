@@ -1,13 +1,5 @@
-podTemplate(label: 'jenkins-docker-pipeline', containers: [
-    containerTemplate(name: 'jnlp', image: 'fdawsdevus/jnlp-docker:2.0'),
-    containerTemplate(name: 'kubectl', image: 'fdawsdevus/k8s-kubectl:latest', command: 'cat', ttyEnabled: true)
-],
-volumes:[
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-]){
-
 node('jenkins-slave') {
-	container('jenkins-docker-pipeline') {
+	container('jnlp-docker') {
 		def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
 		//def projectName = "${scmUrl}".replaceAll('https://github.com/', '').replaceAll('.git', '').replaceAll("${env.DOCKER_USERNAME}",'')
                 def projectName = "${scmUrl}".tokenize('/').last().split("\\.")[0]
@@ -38,5 +30,4 @@ node('jenkins-slave') {
                    
 		sh(""" docker push \$DOCKER_REPO_NAME/$projectName:\$BUILD_NUMBER """)
 	}
-}
 }
