@@ -39,3 +39,4 @@ node('jenkins-slave') {
 		sh(""" docker push \$DOCKER_REPO_NAME/$projectName:\$BUILD_NUMBER """)
 	}
 }
+}
