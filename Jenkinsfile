@@ -17,12 +17,8 @@ node('jenkins-slave') {
 		//sh("printenv DOCKER_USERNAME")
 		//sh("echo $DOCKER_USERNAME")
         /*        sh ("""
-                apt-get update
-                apt-get upgrade docker-ce -y
-                service docker restart
                 """) */
 		checkout scm
-                sh(''' docker version ''')
 		sh(''' docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD ''')
 //                def dockerTag  = "${docker_repo_name}/${imageTag}"
 //                echo dockerTag
