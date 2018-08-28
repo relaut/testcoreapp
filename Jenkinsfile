@@ -45,7 +45,7 @@ podTemplate(label: 'dockerPod', containers: [
             //sh("docker build -f Dockerfile -t test .")
             }
         }
-        }}
+        }
     
     }
     stage('Publish Container') {
