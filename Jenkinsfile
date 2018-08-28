@@ -14,7 +14,7 @@ pipeline {
     agent {
        docker {
          image 'nadpereira/jenkins-slave'
-         //args '-u root'
+         args '-u root'
        }
     }
     stages {
