@@ -20,6 +20,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'whoami'
                 sh 'docker version'
             }
         }
