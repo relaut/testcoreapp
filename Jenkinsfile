@@ -1,14 +1,9 @@
 pipeline {
-    agent {
-       docker {
-         image 'nadpereira/jenkins-slave'
-         args '-u root'
-       }
-    }
+    agent { dockerfile true }
     stages {
-        stage('Build') {
+        stage('Build Test') {
             steps {
-                sh 'docker build image-name:test'
+                sh 'docker version'
             }
         }
     }
