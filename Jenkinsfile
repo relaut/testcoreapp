@@ -1,9 +1,9 @@
 pipeline {
-    agent { dockerfile true }
+    
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh 'node --version'
+                sh 'docker build image-name:test'
             }
         }
     }
