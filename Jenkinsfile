@@ -1,6 +1,7 @@
 node('jenkins-slave') {
 	container('jnlp-docker') {
 		def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
+		sh(''' whoami > /var/out.txt ''')
 		//def projectName = "${scmUrl}".replaceAll('https://github.com/', '').replaceAll('.git', '').replaceAll("${env.DOCKER_USERNAME}",'')
                 def projectName = "${scmUrl}".tokenize('/').last().split("\\.")[0]
                 echo "ProjectName = ${projectName}"
