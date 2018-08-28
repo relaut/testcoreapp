@@ -1,3 +1,15 @@
+pipeline {
+    agent { dockerfile true }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+                sh 'svn --version'
+            }
+        }
+    }
+}
+
 /*node {
 	stage 'Checkout'
 	stage 'Build'
@@ -7,7 +19,7 @@
 	}
         stage 'Archive'
 }
-*/
+
 podTemplate(label: 'dockerPod', containers: [
     containerTemplate(name: 'docker', image: 'docker:latest', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.7.3', command: 'cat', ttyEnabled: true)
@@ -52,3 +64,4 @@ podTemplate(label: 'dockerPod', containers: [
         echo 'PUBLISHING'
      }
 }
+*/
