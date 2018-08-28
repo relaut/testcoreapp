@@ -1,4 +1,4 @@
-node {
+/*node {
 	stage 'Checkout'
 	stage 'Build'
 	stage 'Archive'
@@ -7,8 +7,7 @@ node {
 	}
         stage 'Archive'
 }
-
-/*
+*/
 podTemplate(label: 'dockerPod', containers: [
     containerTemplate(name: 'docker', image: 'docker:latest', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.7.3', command: 'cat', ttyEnabled: true)
@@ -28,18 +27,11 @@ podTemplate(label: 'dockerPod', containers: [
      }
     
      //just an example ... pull requests MAY make more sense to use   
-     stage('Build') {
+     stage('Build for Prod') {
         userInput = input(
         id: 'Proceed1', message: 'Build for Production?', parameters: [
         [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Build for Production']
         ])
-         
-         when { userInput }
-    steps {
-        echo 'I execute on non-master branches.'
-    }
-         
-         
      }
       
         
@@ -54,9 +46,12 @@ podTemplate(label: 'dockerPod', containers: [
             }
         }
         }}
-    
+    else {
+        stage('Build Image for Dev') {
+        echo 'Building for dev...'
+        }
+    }
     stage('Publish Container') {
         echo 'PUBLISHING'
      }
 }
-*/
