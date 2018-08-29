@@ -16,7 +16,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'pwd'
-        sh 'docker version'
+        sh 'notreal version'
         //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
