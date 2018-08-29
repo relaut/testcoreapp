@@ -5,6 +5,14 @@ pipeline {
   }
   
   stages {
+    
+    stage('Who Am I') {
+      steps {
+        
+        sh 'whoami'
+      }
+    }
+    
     stage('Build') {
       steps {
         sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:$.env.BRANCH_NAME-$env.BUILD_NUMBER .'
