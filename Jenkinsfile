@@ -1,16 +1,4 @@
 pipeline {
-    agent { docker 'nadpereira/jenkins-slave' } 
-    stages {
-        stage('Example Build') {
-            steps {
-                sh 'docker version'
-            }
-        }
-    }
-}
-
-/*
-pipeline {
   agent { label 'docker' }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -28,7 +16,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'pwd'
-        sh 'notreal version'
+        sh '/usr/bin/docker version'
         //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
@@ -45,7 +33,7 @@ pipeline {
     }
   }
 }
-
+/*
 
 pipeline {
     agent { dockerfile true }
