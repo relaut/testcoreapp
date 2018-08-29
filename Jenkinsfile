@@ -1,4 +1,16 @@
 pipeline {
+    agent { docker 'nadpereira/jenkins-slave' } 
+    stages {
+        stage('Example Build') {
+            steps {
+                sh 'docker version'
+            }
+        }
+    }
+}
+
+/*
+pipeline {
   agent { label 'docker' }
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -35,7 +47,7 @@ pipeline {
 }
 
 
-/*pipeline {
+pipeline {
     agent { dockerfile true }
     stages {
         stage('Build Test') {
