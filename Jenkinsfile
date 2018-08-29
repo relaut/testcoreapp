@@ -40,7 +40,7 @@ pipeline {
     stages {
         stage('Build Test') {
             steps {
-                sh 'docker version'
+                sh 'notreal version'
             }
         }
     }
