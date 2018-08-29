@@ -15,9 +15,9 @@ pipeline {
     
     stage('Build') {
       steps {
-        sh 'read -p "$*"'
+        sh 'pwd'
         sh 'docker version'
-        //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:$.env.BRANCH_NAME-$env.BUILD_NUMBER .'
+        //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
       
