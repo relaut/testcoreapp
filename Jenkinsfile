@@ -15,7 +15,8 @@ pipeline {
     
     stage('Build') {
       steps {
-        sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:$.env.BRANCH_NAME-$env.BUILD_NUMBER .'
+        sh 'docker version'
+        //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:$.env.BRANCH_NAME-$env.BUILD_NUMBER .'
       }
     }
       
