@@ -1,3 +1,30 @@
+pipeline {
+  agent { label 'docker' }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+  
+  stages {
+    stage('Build') {
+      steps {
+        sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:$.env.BRANCH_NAME-$env.BUILD_NUMBER .'
+      }
+    }
+      
+    stage('Publish') {
+      when {
+        branch 'master'
+      }
+      steps {
+        withDockerRegistry([ credentialsId: "123", url: "" ]) {
+          sh 'docker push nadpereira/relautimages'
+        }
+      }
+    }
+  }
+}
+
+
 /*pipeline {
     agent { dockerfile true }
     stages {
@@ -8,7 +35,7 @@
         }
     }
 }
-*/
+
 
 pipeline {
     agent {
@@ -26,3 +53,4 @@ pipeline {
         }
     }
 }
+*/
