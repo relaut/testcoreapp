@@ -4,10 +4,11 @@ podTemplate(label: 'jenkins-build-agent',
   ) {
 
   //def image = "jenkins/jnlp-slave"
-  node('jnlp-docker') {
+  
+  node('jenkins-slave') {
     stage('Build Docker image') {
       git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
-      container('docker') {
+      container('jnlp-docker') {
         sh "docker build -t ${image} ."
       }
     }
