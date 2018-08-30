@@ -4,6 +4,22 @@ podTemplate(label: 'jenkins-build-agent',
   ) {
 
   //def image = "jenkins/jnlp-slave"
+  node() { 
+  properties([
+     parameters([
+       booleanParam(
+         defaultValue: false,
+         description: 'isFoo should be false',
+         name: 'isFoo'
+       ),
+       booleanParam(
+         defaultValue: true,
+         description: 'isBar should be true',
+         name: 'isBar'
+       ),
+     ])
+   ])
+  }
   
   node('jenkins-build-agent') {
       
