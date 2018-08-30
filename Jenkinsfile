@@ -32,7 +32,9 @@ podTemplate(label: 'jenkins-build-agent',
     stage('Build Docker image') {
       git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
       container('jnlp-docker') {
-        sh "docker build -t ${image} ."
+        sh 'docker version'
+        sh '$env'
+        sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
   }
