@@ -3,24 +3,6 @@ podTemplate(label: 'jenkins-build-agent',
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
 
-  //def image = "jenkins/jnlp-slave"
-  node() { 
-  properties([
-     parameters([
-       booleanParam(
-         defaultValue: false,
-         description: 'isFoo should be false',
-         name: 'isFoo'
-       ),
-       booleanParam(
-         defaultValue: true,
-         description: 'isBar should be true',
-         name: 'isBar'
-       ),
-     ])
-   ])
-  }
-  
   node('jenkins-build-agent') {
       
       stage('Get SCM')  {
@@ -34,21 +16,8 @@ podTemplate(label: 'jenkins-build-agent',
       }
     }
     stage ('Branch') {
-
-      input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                parameters {
-                    string(name: 'PROD_DEPLOY', defaultValue: 'No', description: 'Perform Prod Deployment?')
-                }
-            }
-            when {
-                expression { PROD_DEPLOY == 'Yes' }
-            }
-            steps {
-                echo "Performing Prod Deployment!"
-            }
-
+      def returnValue = input message: 'Need some input', parameters: [string(defaultValue: '', description: '', name: 'Give me a value')]
+            
         }
   }
 }
