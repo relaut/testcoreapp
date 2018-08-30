@@ -27,7 +27,8 @@ podTemplate(label: 'jenkins-build-agent',
 
   //def image = "jenkins/jnlp-slave"
   
-  node('jenkins-slave') {
+  node('jenkins-build-agent') {
+      
     stage('Build Docker image') {
       git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
       container('jnlp-docker') {
@@ -36,7 +37,7 @@ podTemplate(label: 'jenkins-build-agent',
     }
   }
 }
-
+/*
 pipeline {
   agent { label 'docker' }
   options {
@@ -74,7 +75,7 @@ pipeline {
     }
   }
 }
-/*
+
 
 pipeline {
     agent { dockerfile true }
