@@ -17,5 +17,22 @@ podTemplate(label: 'jenkins-build-agent',
         sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
+    stage ('Branch') {
+
+      input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                parameters {
+                    string(name: 'PROD_DEPLOY', defaultValue: 'No', description: 'Perform Prod Deployment?')
+                }
+            }
+            when {
+                expression { PROD_DEPLOY == 'Yes' }
+            }
+            steps {
+                echo "Performing Prod Deployment!"
+            }
+
+        }
   }
 }
