@@ -22,7 +22,9 @@ podTemplate(label: 'jenkins-build-agent',
       }
     }
     stage ('Branch') {
+        def list = ["foo","bar"]
+        def inputRequest = list.collect  { string(defaultValue: "def", description: 'description', name: it)  }
         def myValue = input message: 'Enter Input', parameters: inputRequest
-        }
+      }
   }
 }
