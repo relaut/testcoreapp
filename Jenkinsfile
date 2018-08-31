@@ -45,9 +45,33 @@ pipeline {
             dockerTag = env.BUILD_ID
           }
           def customImage = docker.build("nadpereira/relautimages:$dockerTag")
+           customImage.push()
          }
        }
      }
+     
+     stage("Testing") { 
+       steps { 
+        sh 'Performing some automated tests ....'
+       }
+       
+       post { 
+        success {
+          echo "Testing completed Ok.  Proceeding to next step."
+        }
+        failure {
+          echo "Tests failed ... aborting"
+        }
+      }
+       
+       stage("Push to Environment") { 
+       steps { 
+        echo "Pushing to environments"
+        }
+       }
+       
+     }
+     
    }
 }
 
