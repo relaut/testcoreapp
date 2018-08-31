@@ -47,16 +47,16 @@ pipeline {
             sh 'echo this is a DEV build'
             sh 'echo $BUILD_TAG'
            dockerTag = env.BUILD_TAG
-          }
+          } //if
           else {
             dockerTag = env.BUILD_ID
-          }
+          } //else
           customImage = docker.build("nadpereira/relautimages:$dockerTag")
           
-          }
-         }
-       }
-     }
+          } //script
+         } // steps
+       } //stage
+     
      
      stage("Testing") { 
        steps { 
