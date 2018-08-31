@@ -4,6 +4,7 @@
 //        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
 //  }
 
+
 podTemplate(label: 'jenkins-build-agent',
   containers: [containerTemplate(name: 'jnlp-docker', image: 'nadpereira/jenkins-slave:latest', ttyEnabled: true, command: 'cat')],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
@@ -12,11 +13,11 @@ podTemplate(label: 'jenkins-build-agent',
   
   
   properties([
-   parameters {
-        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
-        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region')
+   parameters( [
+        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info'),
+        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region'),
         booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
-  }
+  ])
    ])
   
   
