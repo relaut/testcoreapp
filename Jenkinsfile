@@ -72,7 +72,7 @@ pipeline {
         }
        }
      }
-       
+   }
      stage("Push to DockerHub") { 
        steps { 
           echo "Pushing to DockerHub"
@@ -81,7 +81,7 @@ pipeline {
             customImage.push()
         }
          }
-         
+       }
       }
        
      
