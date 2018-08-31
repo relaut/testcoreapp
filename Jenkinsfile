@@ -1,25 +1,16 @@
-//parameters {
-//        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
-//        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region')
-//        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
-//  }
-
 
 podTemplate(label: 'jenkins-build-agent',
   containers: [containerTemplate(name: 'jnlp-docker', image: 'nadpereira/jenkins-slave:latest', ttyEnabled: true, command: 'cat')],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
 
-  
-  
   properties([
    parameters( [
+        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'envType'),
+        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly'),
         string(defaultValue: "", description: 'Would you like to add a string?', name: 'info'),
-        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region'),
-        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
-  ])
+    ])
    ])
-  
   
   node('jenkins-build-agent') {
       
@@ -30,6 +21,12 @@ podTemplate(label: 'jenkins-build-agent',
       container('jnlp-docker') {
         sh 'docker version'
         sh 'printenv'
+        
+        if($params.envType == "DEV"){
+          sh 'echo this is a DEV build'
+          sh 'echo ${env.BUILD_TAG}'
+        }
+        
         def customImage = docker.build("nadpereira/relautimages:${env.BUILD_ID}")
     //customImage.push()
 
