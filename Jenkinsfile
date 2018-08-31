@@ -8,7 +8,7 @@ pipeline {
   }
   
   environment {
-    registry = “nadpereira/relautimages”
+    registry = 'nadpereira/relautimages'
     registryCredential = 'dockerhub'
     customImage = ''
     dockerTag = ''
