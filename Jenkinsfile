@@ -12,7 +12,7 @@ podTemplate(label: 'jenkins-build-agent',
   
   node() { 
   properties([
-     parameters([
+   //  parameters([
   //     booleanParam(
  //        defaultValue: false,
  //        description: 'isFoo should be false x',
@@ -23,7 +23,7 @@ podTemplate(label: 'jenkins-build-agent',
    //      description: 'isBar should be true x',
     //     name: 'isBar'
   //     ),
-     ])
+   //  ])
    ])
   }
   
