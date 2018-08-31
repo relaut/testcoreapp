@@ -6,11 +6,28 @@ pipeline {
       //yamlFile 'KubernetesPod.yaml'
     }
   }
-  stages {
-      stage('Get SCM')  {
-        checkout scm
+  
+   stages {
+    // At least one stage is required.
+    stage("first stage") {
+      // Every stage must have a steps block containing at least one step.
+      steps {
+        
+        sh 'docker version'
       }
-  }
+      
+      // Post can be used both on individual stages and for the entire build.
+      post {
+        success {
+          echo "Only when we haven't failed running the first stage"
+        }
+        
+        failure {
+          echo "Only when we fail running the first stage."
+        }
+      }
+    }
+  
 }
 
 /*
