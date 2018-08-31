@@ -17,22 +17,13 @@ podTemplate(label: 'jenkins-build-agent',
     stage('Build Docker image') {
       container('jnlp-docker') {
         sh 'docker version'
-        sh '$env'
+        sh '${env}'
         sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
     stage ('Branch') {
-        input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
+        choice = new ChoiceParameterDefinition('ParName', ['option1','option2'] as String[], 'Description')
+        input message: 'Select One', parameters: [choice]
       
         }
   }
