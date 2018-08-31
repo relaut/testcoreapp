@@ -2,7 +2,7 @@ pipeline {
   agent {
     kubernetes {
       label 'slave-docker'
-      defaultContainer 'jnlp-docker'
+      defaultContainer 'jnlp'
       //yamlFile 'KubernetesPod.yaml'
     }
   }
