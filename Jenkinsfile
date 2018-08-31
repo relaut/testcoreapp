@@ -27,10 +27,10 @@ podTemplate(label: 'jenkins-build-agent',
         if( envType == "DEV"){
           sh 'echo this is a DEV build'
           sh 'echo $BUILD_TAG'
-          dockerTag = ${env.BUILD_TAG}
+          dockerTag = env.BUILD_TAG
         }
         else {
-          dockerTag = ${env.BUILD_ID}
+          dockerTag = env.BUILD_ID
         }
         
         def customImage = docker.build("nadpereira/relautimages:${env.BUILD_ID}")
