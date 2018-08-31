@@ -18,6 +18,7 @@ pipeline {
       
       // Post can be used both on individual stages and for the entire build.
       post {
+        
         success {
           echo "Only when we haven't failed running the first stage"
         }
@@ -25,9 +26,10 @@ pipeline {
         failure {
           echo "Only when we fail running the first stage."
         }
+        
       }
     }
-  
+   }
 }
 
 /*
