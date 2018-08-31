@@ -3,6 +3,12 @@ podTemplate(label: 'jenkins-build-agent',
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
 
+  parameters {
+        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
+        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region')
+        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
+  }
+  
   node('jenkins-build-agent') {
       
       stage('Get SCM')  {
@@ -16,8 +22,18 @@ podTemplate(label: 'jenkins-build-agent',
       }
     }
     stage ('Branch') {
-      def returnValue = input message: 'Need some input', parameters: [string(defaultValue: '', description: '', name: 'Give me a value')]
-            
+        input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
+      
         }
   }
 }
