@@ -17,14 +17,12 @@ podTemplate(label: 'jenkins-build-agent',
     stage('Build Docker image') {
       container('jnlp-docker') {
         sh 'docker version'
-        sh '${env}'
-        sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
+        sh 'printenv'
+        //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
     stage ('Branch') {
-        choice = new ChoiceParameterDefinition('ParName', ['option1','option2'] as String[], 'Description')
-        input message: 'Select One', parameters: [choice]
-      
+        def myValue = input message: 'Enter Input', parameters: inputRequest
         }
   }
 }
