@@ -10,22 +10,15 @@ podTemplate(label: 'jenkins-build-agent',
   ) {
 
   
-  node() { 
+  
   properties([
-   //  parameters([
-  //     booleanParam(
- //        defaultValue: false,
- //        description: 'isFoo should be false x',
- //        name: 'isFoo'
-  //     ),
-  //     booleanParam(
-   //      defaultValue: true,
-   //      description: 'isBar should be true x',
-    //     name: 'isBar'
-  //     ),
-   //  ])
-   ])
+   parameters {
+        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
+        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region')
+        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
   }
+   ])
+  
   
   node('jenkins-build-agent') {
       
