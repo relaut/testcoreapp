@@ -61,7 +61,7 @@ pipeline {
      
      stage("Testing") { 
        steps { 
-        echo "Performing some automated tests ...."
+        sh 'pwd'
        }
        
        post { 
@@ -76,7 +76,6 @@ pipeline {
    
      stage("Push to DockerHub") { 
        steps { 
-          echo "Pushing to DockerHub"
          script {
            docker.withRegistry( ‘’, registryCredential ) {
             customImage.push()
