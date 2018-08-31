@@ -33,7 +33,7 @@ podTemplate(label: 'jenkins-build-agent',
           dockerTag = env.BUILD_ID
         }
         
-        def customImage = docker.build("nadpereira/relautimages:${env.BUILD_ID}")
+        def customImage = docker.build("nadpereira/relautimages:$dockerTag")
     //customImage.push()
 
     //customImage.push('latest')
