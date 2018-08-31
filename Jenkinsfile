@@ -37,7 +37,7 @@ podTemplate(label: 'jenkins-build-agent',
     
     stage ('Branch') {
         
-      sh'Branch stage...'
+      
       }
   }
 }
