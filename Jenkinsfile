@@ -1,4 +1,19 @@
+pipeline {
+  agent {
+    kubernetes {
+      label 'jenkins-build-agent'
+      defaultContainer 'jnlp-docker'
+      //yamlFile 'KubernetesPod.yaml'
+    }
+  }
+  stages {
+      stage('Get SCM')  {
+        checkout scm
+      }
+  }
+}
 
+/*
 podTemplate(label: 'jenkins-build-agent',
   containers: [containerTemplate(name: 'jnlp-docker', image: 'nadpereira/jenkins-slave:latest', ttyEnabled: true, command: 'cat')],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
@@ -53,3 +68,4 @@ podTemplate(label: 'jenkins-build-agent',
       }
   }
 }
+*/
