@@ -22,7 +22,7 @@ podTemplate(label: 'jenkins-build-agent',
         sh 'docker version'
         sh 'printenv'
         
-        if(${envType} == "DEV"){
+        if( envType == "DEV"){
           sh 'echo this is a DEV build'
           sh 'echo ${env.BUILD_TAG}'
         }
