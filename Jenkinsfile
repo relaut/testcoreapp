@@ -35,8 +35,8 @@ pipeline {
      stage("Build"){
        steps {
          script {
-           def dockerTag = ""
-           if( envType == "DEV"){
+          def dockerTag = ""
+          if( envType == "DEV"){
             sh 'echo this is a DEV build'
             sh 'echo $BUILD_TAG'
            dockerTag = env.BUILD_TAG
@@ -45,7 +45,7 @@ pipeline {
             dockerTag = env.BUILD_ID
           }
           def customImage = docker.build("nadpereira/relautimages:$dockerTag")
-           customImage.push()
+          customImage.push()
          }
        }
      }
@@ -62,7 +62,7 @@ pipeline {
         failure {
           echo "Tests failed ... aborting"
         }
-      }
+       }}
        
        stage("Push to Environment") { 
        steps { 
@@ -72,8 +72,8 @@ pipeline {
        
      }
      
-   }
-}
+   } //Stages
+}//Pipeline
 
 /*
 podTemplate(label: 'jenkins-build-agent',
