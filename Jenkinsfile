@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      label 'jenkins-build-agent'
+      label 'slave-docker'
       defaultContainer 'jnlp-docker'
       //yamlFile 'KubernetesPod.yaml'
     }
