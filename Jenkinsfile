@@ -7,6 +7,13 @@ pipeline {
     }
   }
   
+  environment {
+    registry = “nadpereira/relautimages”
+    registryCredential = 'dockerhub'
+    customImage = ''
+    dockerTag = ''
+  }
+  
   parameters {
     choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment is this for?', name: 'envType')
     booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
@@ -35,7 +42,7 @@ pipeline {
      stage("Build"){
        steps {
          script {
-          def dockerTag = ""
+          
           if( envType == "DEV"){
             sh 'echo this is a DEV build'
             sh 'echo $BUILD_TAG'
@@ -44,8 +51,9 @@ pipeline {
           else {
             dockerTag = env.BUILD_ID
           }
-          def customImage = docker.build("nadpereira/relautimages:$dockerTag")
-          customImage.push()
+          customImage = docker.build("nadpereira/relautimages:$dockerTag")
+          
+          }
          }
        }
      }
@@ -65,10 +73,15 @@ pipeline {
        }
      }
        
-     stage("Push to Environment") { 
+     stage("Push to DockerHub") { 
        steps { 
-          echo "Pushing to environments"
+          echo "Pushing to DockerHub"
+         script {
+           docker.withRegistry( ‘’, registryCredential ) {
+            customImage.push()
         }
+         }
+         
       }
        
      
