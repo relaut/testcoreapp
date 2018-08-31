@@ -37,9 +37,9 @@ podTemplate(label: 'jenkins-build-agent',
       }
     }
     
-    def list = ["new","old"]
-        def inputRequest = list.collect  { string(defaultValue: "def", description: 'description', name: it)  }
-        def myValue = input message: 'Enter Input', parameters: inputRequest
+    //def list = ["new","old"]
+    //    def inputRequest = list.collect  { string(defaultValue: "def", description: 'description', name: it)  }
+    //    def myValue = input message: 'Enter Input', parameters: inputRequest
     
     stage ('Branch') {
         
