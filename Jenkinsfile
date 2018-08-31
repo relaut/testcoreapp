@@ -62,15 +62,16 @@ pipeline {
         failure {
           echo "Tests failed ... aborting"
         }
-       }}
-       
-       stage("Push to Environment") { 
-       steps { 
-        echo "Pushing to environments"
-        }
        }
-       
      }
+       
+     stage("Push to Environment") { 
+       steps { 
+          echo "Pushing to environments"
+        }
+      }
+       
+     
      
    } //Stages
 }//Pipeline
