@@ -61,7 +61,7 @@ pipeline {
      
      stage("Testing") { 
        steps { 
-        sh 'Performing some automated tests ....'
+        echo "Performing some automated tests ...."
        }
        
        post { 
