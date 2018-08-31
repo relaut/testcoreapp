@@ -1,8 +1,8 @@
-parameters {
-        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
-        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region')
-        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
-  }
+//parameters {
+//        string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
+//        choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment?', name: 'region')
+//        booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
+//  }
 
 podTemplate(label: 'jenkins-build-agent',
   containers: [containerTemplate(name: 'jnlp-docker', image: 'nadpereira/jenkins-slave:latest', ttyEnabled: true, command: 'cat')],
@@ -21,6 +21,12 @@ podTemplate(label: 'jenkins-build-agent',
       container('jnlp-docker') {
         sh 'docker version'
         sh 'printenv'
+        def customImage = docker.build("nadpereira/relautimages:${env.BUILD_ID}")
+    //customImage.push()
+
+    //customImage.push('latest')
+              
+              
         //sh 'docker build -f "Dockerfile" -t nadpereira/relautimages:test1 .'
       }
     }
