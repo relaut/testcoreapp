@@ -15,7 +15,7 @@ pipeline {
   }
   
   parameters {
-    choice(choices: ['DEV', 'QA', 'PRODUCTION'], description: 'Which environment is this for?', name: 'envType')
+    choice(choices: ['dev', 'qa', 'production'], description: 'Which environment is this for?', name: 'envType')
     booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
     string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
   }
@@ -44,7 +44,7 @@ pipeline {
        steps {
          script {
           
-          if( envType == "DEV"){
+          if( envType == "dev"){
             sh 'echo this is a DEV build'
             sh 'echo $BUILD_TAG'
            dockerTag = env.BUILD_TAG
