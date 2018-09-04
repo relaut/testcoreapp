@@ -88,7 +88,8 @@ pipeline {
      stage("Deploy to Environments") { 
        steps { 
          container('kubectl'){
-         sh("kubectl version")
+           sh("kubectl version")
+           sh("kubectl get ns $envType || kubectl create ns $envType")
          }
        }
       }
