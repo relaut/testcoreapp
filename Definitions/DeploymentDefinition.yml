@@ -1,3 +1,12 @@
+apiVersion: v1
+kind: Namespace                                           
+metadata:
+  name: ingress-nginx
+  labels:
+    name: ingress-nginx
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +23,26 @@ spec:
         metadata:
             labels: {app: testcoreapp}
         spec:
-            containers: [{name: testcoreapp, image: 'nadpereira/relautimages:latest', imagePullPolicy: Always,  ports: [{containerPort: 80}]}]
+            containers: [{name: testcoreapp, image: 'nadpereira/relautimages:v3', imagePullPolicy: Always,  ports: [{containerPort: 80}]}]
             imagePullSecrets: [{name: myregistrykey}]
 
+
+---
+
+apiVersion: v1
+kind: Service                                           
+metadata:
+  name: testcoreapp-service                             
+  labels:
+    app: testcoreapp-service
+    version: 1.0.0.0
+  namespace: ingress-nginx
+spec:                                                
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: NodePort  #creates LoadBalancer
+  selector:
+    app: testcoreapp                          

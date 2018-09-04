@@ -22,7 +22,7 @@ spec:
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.18.0
           args:
             - /nginx-ingress-controller
-            - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
+            - --default-backend-service=$(POD_NAMESPACE)/testcoreapp-service
             - --configmap=nginx-configuration
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
