@@ -3,21 +3,7 @@ pipeline {
     kubernetes {
       label 'slave-docker'
       defaultContainer 'jnlp'
-      yaml = """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    some-label: test-app
-spec:
-  containers:
-  - name: kubectl
-    image: lachlanevenson/k8s-kubectl:latest
-    imagePullPolicy: Always
-    command:
-    - cat
-    tty: true
-"""
+      yaml = ""
     }
   }
   
