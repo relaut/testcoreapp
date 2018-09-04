@@ -3,7 +3,7 @@ pipeline {
     kubernetes {
       label 'slave-docker'
       defaultContainer 'jnlp'
-      pod_yaml = """
+      yaml = """
 apiVersion: v1
 kind: Pod
 metadata:
