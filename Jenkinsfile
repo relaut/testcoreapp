@@ -90,6 +90,8 @@ pipeline {
          container('kubectl'){
            sh("kubectl version")
            sh("kubectl get ns $envType || kubectl create ns $envType")
+           sh("pwd")
+           sh("ls")
          }
        }
       }
