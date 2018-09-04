@@ -3,7 +3,21 @@ pipeline {
     kubernetes {
       label 'slave-docker'
       defaultContainer 'jnlp'
-      //yamlFile 'KubernetesPod.yaml'
+      pod_yaml = """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: test-app
+spec:
+  containers:
+  - name: kubectl
+    image: lachlanevenson/k8s-kubectl:latest
+    imagePullPolicy: Always
+    command:
+    - cat
+    tty: true
+"""
     }
   }
   
@@ -87,7 +101,7 @@ pipeline {
      
      stage("Deploy to Environments") { 
        steps { 
-         container('lach-kubectl'){
+         container('kubectl'){
          sh("kubectl version")
          }
        }
