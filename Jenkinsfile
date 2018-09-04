@@ -3,7 +3,7 @@ pipeline {
     kubernetes {
       label 'slave-docker'
       defaultContainer 'jnlp'
-      yaml = ""
+      
     }
   }
   
