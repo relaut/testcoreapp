@@ -83,7 +83,17 @@ pipeline {
          }
        }
       }
-       
+      
+     
+     stage("Deploy to Environments") { 
+       steps { 
+         script {
+          //Verify first it can run commands (it shouldn't until it has the correct container)
+          sh 'kubectl version'
+         }
+       }
+      }
+      
      
      
    } //Stages
