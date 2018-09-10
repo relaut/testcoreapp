@@ -113,20 +113,25 @@ pipeline {
           sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
           sh("sed -i.bak 's#{{app}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
           
-          //Deployment update - 
+          //Deployment update
           sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/dev/*.yml")
           sh("sed -i.bak 's#{{app}}#${appName}#' ./k8s/dev/*.yml")
           sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/dev/*.yml")
           sh("sed -i.bak 's#{{envType}}#${envType}#' ./k8s/dev/*.yml")
           
+          //Ingress update
+          sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/ingress/*.yml")
+          sh("sed -i.bak 's#{{hostPath}}#${appName}.${env.BRANCH_NAME}.${envType}.resistance.mnstr.io#' ./k8s/ingress/*.yml")
+          
+          
           //verify 
           sh("cat ./k8s/services/testcoreappservice.yml")
           sh("cat ./k8s/dev/devdeployment.yml")
-          
-          //Todo - create ingress (and apply)
+          sh("cat ./k8s/ingress/devingress.yml")
           
           sh("kubectl --namespace=${envType} apply -f k8s/services/")
           sh("kubectl --namespace=${envType} apply -f k8s/dev/")
+          sh("kubectl --namespace=${envType} apply -f k8s/ingress/")
           echo "show endpoint HERE"
         }
       }     
