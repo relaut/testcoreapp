@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: {{name}}
   labels:
-        app: {{app}}
+        app: {{name}}
         env: {{envType}}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{app}}
+        app: {{name}}
     spec:
       containers:
       - name: {{name}}
