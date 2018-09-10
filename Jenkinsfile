@@ -102,7 +102,7 @@ pipeline {
      stage('Deploy Dev') {
       // Developer Branches
       when { 
-        expression { ${envType} == 'dev' }
+        expression { envType == 'dev' }
       } 
       steps {
         container('kubectl') {
@@ -141,7 +141,7 @@ pipeline {
     stage('Deploy Canary') {
       // Developer Branches
       when { 
-        expression { ${envType} == 'production' }
+        expression { envType == 'production' }
       }
       steps {
         container('kubectl') {
