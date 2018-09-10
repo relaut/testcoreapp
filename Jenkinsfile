@@ -1,3 +1,6 @@
+def  appName = 'testcoreapp'
+def  svcName = "${appName}-${env.BRANCH_NAME}"
+
 pipeline {
   agent {
     kubernetes {
@@ -85,7 +88,7 @@ pipeline {
       }
       
      
-     stage("Deploy to Environments") { 
+     stage("Deployment Environment Initialize") { 
        steps { 
          container('kubectl'){
            sh("kubectl version")
@@ -96,7 +99,32 @@ pipeline {
        }
       }
       
-     
+     stage('Deploy Dev') {
+      // Developer Branches
+      when { 
+        not { branch 'production' } 
+        not { branch 'qa' }
+      } 
+      steps {
+        container('kubectl') {
+          //Service update
+          sh("sed -i.bak 's#{{envType}}#${envType}#' ./k8s/services/testcoreappservice.yaml")
+          sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/services/testcoreappservice.yaml")
+          
+          //Deployment update - 
+          sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/dev/*.yaml")
+          sh("sed -i.bak 's#{{app}}#${appName}#' ./k8s/dev/*.yaml")
+          sh("sed -i.bak 's#{{image}}#${envType}#' ./k8s/dev/*.yaml")
+          sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/dev/*.yaml")
+          
+          //Todo - create ingress (and apply)
+          
+          sh("kubectl --namespace=${envType} apply -f k8s/services/")
+          sh("kubectl --namespace=${envType} apply -f k8s/dev/")
+          echo "show endpoint HERE"
+        }
+      }     
+    }
      
    } //Stages
 }//Pipeline
