@@ -1,1 +1,20 @@
-//Adding
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{name}}
+  labels:
+        app: {{app}}
+        env: {{envType}}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{app}}
+    spec:
+      containers:
+      - name: {{name}}
+        image: {{image}}
+        ports:
+        - name: {{name}}-port
+          containerPort: 80
