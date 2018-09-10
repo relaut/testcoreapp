@@ -116,6 +116,7 @@ pipeline {
           sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/dev/*.yml")
           sh("sed -i.bak 's#{{app}}#${appName}#' ./k8s/dev/*.yml")
           sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/dev/*.yml")
+          sh("sed -i.bak 's#{{envType}}#${envType}#' ./k8s/dev/*.yml")
           
           //verify 
           sh("cat ./k8s/services/testcoreappservice.yml")
