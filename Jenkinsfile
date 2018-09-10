@@ -121,6 +121,7 @@ pipeline {
           
           //Ingress update
           sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/ingress/*.yml")
+          sh("sed -i.bak 's#{{serviceName}}#${svcName}#' ./k8s/ingress/*.yml")
           sh("sed -i.bak 's#{{hostPath}}#${appName}.${env.BRANCH_NAME}.${envType}.resistance.mnstr.io#' ./k8s/ingress/*.yml")
           
           
