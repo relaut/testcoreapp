@@ -102,8 +102,8 @@ pipeline {
      stage('Deploy Dev') {
       // Developer Branches
       when { 
-        not { envType 'production' } 
-        not { envType 'qa' }
+        not { $envType 'production' } 
+        not { $envType 'qa' }
       } 
       steps {
         container('kubectl') {
@@ -141,7 +141,7 @@ pipeline {
     
     stage('Deploy Canary') {
       // Developer Branches
-      when { envType 'production' }
+      when { $envType 'production' }
       steps {
         container('kubectl') {
           echo "show endpoint HERE"
