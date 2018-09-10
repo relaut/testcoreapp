@@ -1,1 +1,12 @@
-//placeholder
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{name}}-ingress
+spec:
+  rules:
+  - host: {{hostPath}}
+    http:
+      paths:
+      - backend:
+          serviceName: {{serviceName}}
+          servicePort: 80
