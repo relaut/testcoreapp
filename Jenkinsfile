@@ -111,6 +111,7 @@ pipeline {
           sh("sed -i.bak 's#{{envType}}#${envType}#' ./k8s/services/testcoreappservice.yml")
           sh("sed -i.bak 's#{{namespace}}#${envType}#' ./k8s/services/testcoreappservice.yml")
           sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
+          sh("sed -i.bak 's#{{app}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
           
           //Deployment update - 
           sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/dev/*.yml")
