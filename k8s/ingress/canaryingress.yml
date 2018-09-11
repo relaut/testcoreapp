@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: testcoreapp-canary-ingress
+spec:
+  rules:
+  - host: canary.testcoreapp.resistance.mnstr.io
+    http:
+      paths:
+      - backend:
+          serviceName: testcoreapp-canary
+          servicePort: 80
