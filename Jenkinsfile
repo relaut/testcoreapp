@@ -155,6 +155,12 @@ pipeline {
           //Deployment update
           sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/production/*.yml")
           
+          //verify 
+          sh("cat ./k8s/services/testcoreappservice.yml")
+          sh("cat ./k8s/production/productiondeployment.yml")
+          sh("cat ./k8s/ingress/prodingress.yml")
+          
+          
           sh("kubectl --namespace=${envType} apply -f k8s/services/")
           sh("kubectl --namespace=${envType} apply -f k8s/production/")
           sh("kubectl --namespace=${envType} apply -f k8s/ingress/prodingress.yml")
