@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: testcoreapp-ingress
+spec:
+  rules:
+  - host: testcoreapp.resistance.mnstr.io
+    http:
+      paths:
+      - backend:
+          serviceName: testcoreapp
+          servicePort: 80
