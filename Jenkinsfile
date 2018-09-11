@@ -45,6 +45,7 @@ pipeline {
      
      stage("Build"){
        steps {
+         sh("sed -i.bak 's#{{buildVersion}}#${dockerTag}#' ./Views/Home/Index.html")
          script {
           
           if( envType == "dev"){
