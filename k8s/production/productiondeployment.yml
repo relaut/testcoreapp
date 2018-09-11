@@ -1,1 +1,20 @@
-//placeholder
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: testcoreapp
+  labels:
+        app: testcoreapp
+        env: production
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: testcoreapp
+    spec:
+      containers:
+      - name: {{name}}
+        image: {{image}}
+        ports:
+        - name: tca-port
+          containerPort: 80
