@@ -18,7 +18,7 @@ pipeline {
   }
   
   parameters {
-    choice(choices: ['dev', 'qa', 'production'], description: 'Which environment is this for?', name: 'envType')
+    choice(choices: ['dev', 'qa', 'production', 'canary'], description: 'Which environment is this for?', name: 'envType')
     booleanParam(defaultValue: false, description: 'Build and Verify Only?', name: 'buildOnly')
     string(defaultValue: "", description: 'Would you like to add a string?', name: 'info')
   }
@@ -139,10 +139,36 @@ pipeline {
     }//Deploy Dev
      
     
-    stage('Deploy Canary') {
+     stage('Deploy Production') {
       // Developer Branches
       when { 
         expression { envType == 'production' }
+      }
+      steps {
+        container('kubectl') {
+          
+          //Service update
+          sh("sed -i.bak 's#{{envType}}#${envType}#' ./k8s/services/testcoreappservice.yml")
+          sh("sed -i.bak 's#{{namespace}}#${envType}#' ./k8s/services/testcoreappservice.yml")
+          sh("sed -i.bak 's#{{name}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
+          sh("sed -i.bak 's#{{app}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
+          
+          //Deployment update
+          sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/dev/*.yml")
+          
+          sh("kubectl --namespace=${envType} apply -f k8s/services/")
+          sh("kubectl --namespace=${envType} apply -f k8s/production/")
+          sh("kubectl --namespace=${envType} apply -f k8s/ingress/prodingress.yml")
+          
+        }
+      }     
+    } 
+     
+     
+    stage('Deploy Canary') {
+      // Developer Branches
+      when { 
+        expression { envType == 'canary' }
       }
       steps {
         container('kubectl') {
