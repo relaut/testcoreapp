@@ -6,7 +6,7 @@ metadata:
         app: testcoreapp-canary
         env: production
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
