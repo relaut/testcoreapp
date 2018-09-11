@@ -3,17 +3,18 @@ kind: Deployment
 metadata:
   name: testcoreapp-canary
   labels:
-        app: testcoreapp-canary
+        app: testcoreapp
         env: production
+        type: canary
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: testcoreapp-canary
+        app: testcoreapp
     spec:
       containers:
-      - name: {{name}}
+      - name: testcoreapp
         image: {{image}}
         ports:
         - name: tca-port
