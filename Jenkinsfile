@@ -154,7 +154,7 @@ pipeline {
           sh("sed -i.bak 's#{{app}}#${svcName}#' ./k8s/services/testcoreappservice.yml")
           
           //Deployment update
-          sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/dev/*.yml")
+          sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/production/*.yml")
           
           sh("kubectl --namespace=${envType} apply -f k8s/services/")
           sh("kubectl --namespace=${envType} apply -f k8s/production/")
