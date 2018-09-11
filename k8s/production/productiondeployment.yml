@@ -13,7 +13,7 @@ spec:
         app: testcoreapp
     spec:
       containers:
-      - name: {{name}}
+      - name: testcoreapp
         image: {{image}}
         ports:
         - name: tca-port
