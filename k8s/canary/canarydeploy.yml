@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: testcoreapp-canary
+  labels:
+        app: testcoreapp-canary
+        env: production
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: testcoreapp-canary
+    spec:
+      containers:
+      - name: {{name}}
+        image: {{image}}
+        ports:
+        - name: tca-port
+          containerPort: 80
