@@ -5,12 +5,15 @@ metadata:
   labels:
         app: testcoreapp
         env: production
+        track: stable
 spec:
   replicas: 3
   template:
     metadata:
       labels:
         app: testcoreapp
+        env: production
+        track: stable
     spec:
       containers:
       - name: testcoreapp
