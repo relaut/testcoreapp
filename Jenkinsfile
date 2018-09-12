@@ -194,7 +194,7 @@ pipeline {
           
           echo "Prod deployment has been updated.  Continue with destroying the Canary?"
           input("Ready to proceed with destroying Canary deployment?")
-          sh("kubectl --namespace=production delete deployment ${appName}")
+          sh("kubectl --namespace=production delete deployment ${appName}-canary")
           
           echo "The canary is dead ... poor canary :("
         }
