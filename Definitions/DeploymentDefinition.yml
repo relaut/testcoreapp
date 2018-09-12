@@ -14,6 +14,6 @@ spec:
         metadata:
             labels: {app: testcoreapp}
         spec:
-            containers: [{name: testcoreapp, image: 'nadpereira/relautimages:latest', imagePullPolicy: Always,  ports: [{containerPort: 80}]}]
+            containers: [{name: testcoreapp, image: 'nadpereira/relautimages', imagePullPolicy: Always,  ports: [{containerPort: 80}]}]
             imagePullSecrets: [{name: myregistrykey}]
 
