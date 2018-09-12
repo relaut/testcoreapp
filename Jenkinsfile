@@ -150,22 +150,10 @@ pipeline {
       steps {
         container('kubectl') {
           
-          //Service update
-          sh("sed -i.bak 's#{{envType}}#${envType}#' ./k8s/services/testcoreappservice.yml")
-          sh("sed -i.bak 's#{{namespace}}#${envType}#' ./k8s/services/testcoreappservice.yml")
-          sh("sed -i.bak 's#{{name}}#${appName}#' ./k8s/services/testcoreappservice.yml")
-          
           //Deployment update
           sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/production/*.yml")
-          
-          //verify 
-          sh("cat ./k8s/services/testcoreappservice.yml")
-          sh("cat ./k8s/production/productiondeployment.yml")
-          sh("cat ./k8s/ingress/prodingress.yml")
-          
-          
-          sh("kubectl --namespace=${envType} apply -f k8s/services/")
-          sh("kubectl --namespace=${envType} apply -f k8s/production/")
+          //prod will be a static configuration
+          sh("kubectl --namespace=${envType} apply -f k8s/production/productiondeployment.yml")
           sh("kubectl --namespace=${envType} apply -f k8s/ingress/prodingress.yml")
           
         }
@@ -195,6 +183,8 @@ pipeline {
           
           echo "Canary deployed to canary testing route only.  When ready, continue to split traffic for canary test."
           input("Ready to proceed to split traffic 3 to 1?")
+          
+          
           echo "show endpoint HERE"
         }
       }     
