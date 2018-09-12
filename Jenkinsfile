@@ -153,7 +153,7 @@ pipeline {
           //Deployment update
           sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/production/*.yml")
           //prod will be a static configuration
-          sh("kubectl --namespace=${envType} apply -f k8s/production/productiondeployment.yml")
+          sh("kubectl --namespace=${envType} apply -f k8s/production/")
           sh("kubectl --namespace=${envType} apply -f k8s/ingress/prodingress.yml")
           
         }
