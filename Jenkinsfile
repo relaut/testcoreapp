@@ -184,8 +184,20 @@ pipeline {
           echo "Canary deployed to canary testing route only.  When ready, continue to split traffic for canary test."
           input("Ready to proceed to split traffic 3 to 1?")
           
+          kc patch service testcoreapp --type='json' -p='[{"op":"add", "path":"/spec/selector", "value": {"app":"testcoreapp","env":"production"} }]' -n production
+          sh("kubectl patch service testcoreapp --type='json' -p='[{"op":"add", "path":"/spec/selector", "value": {"app":"testcoreapp","env":"production"} }]' -n production")
           
-          echo "show endpoint HERE"
+          echo "Canary nodes are now taking 25% of traffic.  Continue to the next step to update the Prod deployment."
+          input("Ready to proceed with updating the Prod deployment to the ?")
+          sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/production/*.yml")
+          //prod will be a static configuration
+          sh("kubectl --namespace=production apply -f k8s/production/")
+          
+          echo "Prod deployment has been updated.  Continue with destroying the Canary?"
+          input("Ready to proceed with destroying Canary deployment?")
+          sh("kubectl --namespace=production delete deployment ${appName}")
+          
+          echo "The canary is dead ... poor canary :("
         }
       }     
     }
