@@ -193,6 +193,8 @@ pipeline {
           sh("kubectl --namespace=production apply -f k8s/canary/canarydeploy.yml")
           sh("kubectl --namespace=production apply -f k8s/ingress/canaryingress.yml")
           
+          echo "Canary deployed to canary testing route only.  When ready, continue to split traffic for canary test."
+          input("Ready to proceed to split traffic 3 to 1?")
           echo "show endpoint HERE"
         }
       }     
