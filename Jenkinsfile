@@ -184,7 +184,6 @@ pipeline {
           echo "Canary deployed to canary testing route only.  When ready, continue to split traffic for canary test."
           input("Ready to proceed to split traffic 3 to 1?")
           
-          kc patch service testcoreapp --type='json' -p='[{"op":"add", "path":"/spec/selector", "value": {"app":"testcoreapp","env":"production"} }]' -n production
           sh("kubectl patch service testcoreapp --type='json' -p='[{"op":"add", "path":"/spec/selector", "value": {"app":"testcoreapp","env":"production"} }]' -n production")
           
           echo "Canary nodes are now taking 25% of traffic.  Continue to the next step to update the Prod deployment."
