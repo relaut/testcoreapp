@@ -185,8 +185,8 @@ pipeline {
           sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/canary/canarydeploy.yml")
           
           //verify 
-          sh("cat ./k8s/services/canaryservice.yml")
-          sh("cat ./k8s/production/canarydeploy.yml")
+          sh("cat ./k8s/canary/canaryservice.yml")
+          sh("cat ./k8s/canary/canarydeploy.yml")
           sh("cat ./k8s/ingress/canaryingress.yml")
           
           sh("kubectl --namespace=production apply -f k8s/canary/canaryservice.yml")
