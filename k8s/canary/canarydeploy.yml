@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: testcoreapp
+        env: production
+        type: canary
     spec:
       containers:
       - name: testcoreapp
