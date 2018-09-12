@@ -90,6 +90,9 @@ pipeline {
       
      
      stage("Deployment Environment Initialize") { 
+       when { 
+        expression { envType != 'canary' }
+      }
        steps { 
          container('kubectl'){
            sh("kubectl version")
@@ -177,6 +180,19 @@ pipeline {
       }
       steps {
         container('kubectl') {
+         
+          //Deployment update
+          sh("sed -i.bak 's#{{image}}#nadpereira/relautimages:${dockerTag}#' ./k8s/canary/canarydeploy.yml")
+          
+          //verify 
+          sh("cat ./k8s/services/canaryservice.yml")
+          sh("cat ./k8s/production/canarydeploy.yml")
+          sh("cat ./k8s/ingress/canaryingress.yml")
+          
+          sh("kubectl --namespace=production apply -f k8s/canary/canaryservice.yml")
+          sh("kubectl --namespace=production apply -f k8s/canary/canarydeploy.yml")
+          sh("kubectl --namespace=production apply -f k8s/ingress/canaryingress.yml")
+          
           echo "show endpoint HERE"
         }
       }     
