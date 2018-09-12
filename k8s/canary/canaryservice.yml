@@ -4,7 +4,7 @@ metadata:
   labels:
     env: production
     app: testcoreapp
-    type: canary
+    track: canary
   name: testcoreapp-canary
   namespace: production
 spec:
@@ -15,6 +15,7 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
+    env: production
     app: testcoreapp
-    type: canary
+    track: canary
   type: NodePort
